@@ -12,7 +12,6 @@ const footerNavigation = {
     { name: 'Blog', href: '/blog', description: 'APO insights and updates' },
     { name: 'Documentation', href: '/docs', description: 'Technical guides' },
     { name: 'Case Studies', href: '/blog?category=case-studies', description: 'Success stories' },
-    { name: 'API Reference', href: '/docs/api', description: 'Developer resources' },
   ],
   company: [
     { name: 'About Narradar', href: '/about', description: 'Our mission and team' },
@@ -24,7 +23,6 @@ const footerNavigation = {
     { name: 'Privacy Policy', href: '/legal/privacy', description: 'How we protect your data' },
     { name: 'Terms of Service', href: '/legal/terms', description: 'Service terms' },
     { name: 'Security', href: '/security', description: 'Security practices' },
-    { name: 'Compliance', href: '/compliance', description: 'Regulatory compliance' },
   ],
 }
 
