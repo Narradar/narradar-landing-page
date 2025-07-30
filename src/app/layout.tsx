@@ -72,10 +72,32 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.narradar.com'
+  const ga4MeasurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
   
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        {/* Google Analytics 4 */}
+        {ga4MeasurementId && (
+          <>
+            <script 
+              async 
+              src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${ga4MeasurementId}');
+                  gtag('config', 'AW-17090066265');
+                `,
+              }}
+            />
+          </>
+        )}
+        
         {/* Global Structured Data */}
         <OrganizationStructuredData
           name="Narradar"
