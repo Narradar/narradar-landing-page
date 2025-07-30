@@ -80,6 +80,30 @@ Form submits without JavaScript. Demo loads under 1.5 seconds on 4G. Answer box 
 **Purpose**
 Explain APO and why it matters. Show before and after. Map to brand and comms workflows.
 
+**Agent Perception: What It Is, and Why It Matters**
+Agent Perception is how autonomous AI systems — from LLMs to action-taking agents — interpret, reframe, and act on your brand's message.
+
+It's not just about showing up in AI answers (GEO).
+It's about how you're understood, how you're presented, and eventually, how you're prioritized in decision loops.
+
+Where traditional optimization focuses on visibility, Agent Perception focuses on fidelity:
+
+Did the AI preserve your tone and intent?
+
+Did it frame you correctly for different audiences?
+
+Does it recommend, ignore, or misrepresent you?
+
+Narradar's approach to Agent Perception Optimization (APO) measures these distortions, scoring how closely your message survives across:
+
+Multiple models (GPT, Claude, Gemini, Grok)
+
+Multiple prompts and use cases
+
+Multiple personas (e.g. analyst, consumer, regulator)
+
+In a system where AI agents make decisions before humans ever read the content, controlling perception becomes the new communications challenge.
+
 **Glossary**
 
 * Beacon: your truth
@@ -253,7 +277,7 @@ Control your narrative in the AI multiverse.
 Expert and direct with a little wit. No buzzword soup.
 
 **Keyword clusters**
-AI perception. Semantic drift. AI brand monitoring. AI model interpretation. AI misquote.
+Agent perception. Semantic drift. AI brand monitoring. AI model interpretation. AI misquote.
 
 **On page rules**
 Titles under 60 characters. Meta descriptions near 155. OG and Twitter tags. Internal links from homepage into APO and How it works. Cross links from blog back to those pages.
