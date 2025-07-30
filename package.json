@@ -1,0 +1,50 @@
+{
+  "name": "narradar-landing",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "test:forms": "node scripts/test-forms.js",
+    "test:forms:dev": "node scripts/test-forms.js --url=http://localhost:3000",
+    "test:forms:staging": "node scripts/test-forms.js --url=https://staging.narradar.com",
+    "test:forms:prod": "node scripts/test-forms.js --url=https://www.narradar.com",
+    "test:ai": "node scripts/test-ai-agents.js",
+    "test:ai:dev": "node scripts/test-ai-agents.js --url=http://localhost:3000",
+    "test:ai:staging": "node scripts/test-ai-agents.js --url=https://staging.narradar.com",
+    "test:ai:prod": "node scripts/test-ai-agents.js --url=https://www.narradar.com",
+    "test:ai:full": "node scripts/test-ai-agents.js --full-report --output=./ai-test-results.json",
+    "validate:geo": "node scripts/validate-geo.js",
+    "validate:geo:dev": "node scripts/validate-geo.js --url=http://localhost:3000",
+    "validate:geo:staging": "node scripts/validate-geo.js --url=https://staging.narradar.com",
+    "validate:geo:prod": "node scripts/validate-geo.js --url=https://www.narradar.com --output=./geo-validation-results.json"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "@next/mdx": "^15.4.5",
+    "autoprefixer": "^10.4.21",
+    "gray-matter": "^4.0.3",
+    "next": "^15.4.5",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "sharp": "^0.33.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.4.5",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.0.0"
+  }
+}
