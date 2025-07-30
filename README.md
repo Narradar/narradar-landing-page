@@ -2,6 +2,8 @@
 
 A modern Next.js 15 marketing website for Narradar's Agent Perception Optimization (APO) platform.
 
+> **Production Ready** - Deployed at v1.0.0
+
 ## Features
 
 - **Next.js 15** with App Router and TypeScript
