@@ -9,10 +9,12 @@ interface BeaconCheckFormProps {
 
 export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
   const [formData, setFormData] = useState({
-    message: '',
+    firstName: '',
+    lastName: '',
     email: '',
     company: '',
     role: '',
+    beacon: '',
     consent: false,
     // Honeypot fields
     website: '',
@@ -43,10 +45,8 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
 
-    if (!formData.message.trim()) {
-      newErrors.message = 'Please enter a message to analyze'
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message should be at least 10 characters long'
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'First name is required'
     }
 
     if (!formData.email.trim()) {
@@ -57,6 +57,12 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
 
     if (!formData.company.trim()) {
       newErrors.company = 'Company name is required'
+    }
+
+    if (!formData.beacon.trim()) {
+      newErrors.beacon = 'Please enter your beacon to analyze'
+    } else if (formData.beacon.trim().length < 10) {
+      newErrors.beacon = 'Beacon should be at least 10 characters long'
     }
 
     if (!formData.consent) {
@@ -77,6 +83,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
     try {
       const submissionData = {
         ...formData,
+        message: formData.beacon, // Map beacon to message for API compatibility
         type: 'beacon-check',
         timestamp: Date.now(),
         formStartTime: formStartTimeRef.current,
@@ -169,8 +176,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
           Run Your Free Beacon Check
         </h3>
         <p className="text-gray-600 leading-relaxed">
-          Submit your message and we'll analyze how different AI models interpret it. 
-          Get detailed insights on semantic drift and alignment scores.
+          We'd love to hear from you! Please fill out the form and we'll get back to you as soon as possible.
         </p>
       </div>
 
@@ -210,34 +216,47 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
             autoComplete="off"
           />
         </div>
-        {/* Message Input */}
-        <div>
-          <label 
-            htmlFor="message" 
-            className="block text-sm font-semibold text-gray-900 mb-2"
-          >
-            Your Message *
-          </label>
-          <textarea
-            id="message"
-            rows={4}
-            className={`form-textarea ${errors.message ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}`}
-            placeholder="Enter the marketing message, press release, or content you'd like to analyze..."
-            value={formData.message}
-            onChange={(e) => handleChange('message', e.target.value)}
-            maxLength={1000}
-            aria-describedby={errors.message ? 'message-error' : 'message-help'}
-          />
-          {errors.message && (
-            <p id="message-error" className="mt-2 text-sm text-red-600" role="alert">
-              {errors.message}
-            </p>
-          )}
-          {!errors.message && (
-            <p id="message-help" className="mt-2 text-sm text-gray-500">
-              {formData.message.length}/1000 characters
-            </p>
-          )}
+        {/* Name Fields */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div>
+            <label 
+              htmlFor="firstName" 
+              className="block text-sm font-semibold text-gray-900 mb-2"
+            >
+              First Name *
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              className={`form-input ${errors.firstName ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}`}
+              placeholder="John"
+              value={formData.firstName}
+              onChange={(e) => handleChange('firstName', e.target.value)}
+              aria-describedby={errors.firstName ? 'firstName-error' : undefined}
+            />
+            {errors.firstName && (
+              <p id="firstName-error" className="mt-2 text-sm text-red-600" role="alert">
+                {errors.firstName}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label 
+              htmlFor="lastName" 
+              className="block text-sm font-semibold text-gray-900 mb-2"
+            >
+              Last Name
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              className="form-input"
+              placeholder="Doe"
+              value={formData.lastName}
+              onChange={(e) => handleChange('lastName', e.target.value)}
+            />
+          </div>
         </div>
 
         {/* Email Input */}
@@ -269,7 +288,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
           )}
         </div>
 
-        {/* Company and Role */}
+        {/* Company and Job Title */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
             <label 
@@ -299,24 +318,47 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
               htmlFor="role" 
               className="block text-sm font-semibold text-gray-900 mb-2"
             >
-              Role
+              Job Title
             </label>
-            <select
+            <input
+              type="text"
               id="role"
-              className="form-select"
+              className="form-input"
+              placeholder="Your Job Title"
               value={formData.role}
               onChange={(e) => handleChange('role', e.target.value)}
-            >
-              <option value="">Select your role</option>
-              <option value="CMO">CMO</option>
-              <option value="Marketing Director">Marketing Director</option>
-              <option value="Marketing Manager">Marketing Manager</option>
-              <option value="Content Manager">Content Manager</option>
-              <option value="PR Manager">PR Manager</option>
-              <option value="Brand Manager">Brand Manager</option>
-              <option value="Other">Other</option>
-            </select>
+            />
           </div>
+        </div>
+
+        {/* Your Beacon */}
+        <div>
+          <label 
+            htmlFor="beacon" 
+            className="block text-sm font-semibold text-gray-900 mb-2"
+          >
+            Your Beacon *
+          </label>
+          <textarea
+            id="beacon"
+            rows={4}
+            className={`form-textarea ${errors.beacon ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : ''}`}
+            placeholder="Enter the marketing message, press release, or content you'd like to analyze..."
+            value={formData.beacon}
+            onChange={(e) => handleChange('beacon', e.target.value)}
+            maxLength={1000}
+            aria-describedby={errors.beacon ? 'beacon-error' : 'beacon-help'}
+          />
+          {errors.beacon && (
+            <p id="beacon-error" className="mt-2 text-sm text-red-600" role="alert">
+              {errors.beacon}
+            </p>
+          )}
+          {!errors.beacon && (
+            <p id="beacon-help" className="mt-2 text-sm text-gray-500">
+              {formData.beacon.length}/1000 characters
+            </p>
+          )}
         </div>
 
         {/* Consent Checkbox */}
@@ -367,7 +409,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
             disabled={isSubmitting || !formData.consent}
             className="font-semibold"
           >
-            {isSubmitting ? 'Processing Your Request...' : 'Get My Free Analysis'}
+            {isSubmitting ? 'Submitting...' : 'Submit'}
           </Button>
           
           {leadScore && (
