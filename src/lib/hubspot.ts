@@ -36,7 +36,6 @@ export interface HubSpotFormSubmission {
     pageName: string;
     hutk?: string;
     ipAddress?: string;
-    timestamp?: string;
   };
   legalConsentOptions?: {
     consent: {
@@ -273,7 +272,6 @@ export class HubSpotClient {
       context: {
         pageUri: contact.pageUri || 'https://www.narradar.com',
         pageName: formType === 'beacon-check' ? 'Beacon Check Form' : formType === 'beta-signup' ? 'Beta Signup Form' : 'Contact Form',
-        timestamp: new Date().toISOString(),
       },
     };
 
