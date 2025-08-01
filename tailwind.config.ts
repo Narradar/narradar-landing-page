@@ -6,76 +6,148 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
-      // Design tokens as specified in PRD
+      // Professional cybersecurity color system
       colors: {
-        // Primary brand colors
+        // Primary brand colors - Deep blue with cyber aesthetics
         primary: {
-          25: '#f8faff', // Ultra-light for subtle backgrounds
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          25: '#f0f4ff',   // Light mode subtle backgrounds
+          50: '#e6f0ff',   // Light mode cards
+          100: '#cce0ff',  // Light mode hover states
+          200: '#99c2ff',  // Light accents
+          300: '#66a3ff',  // Interactive elements
+          400: '#3385ff',  // Primary interactions
+          500: '#0066ff',  // Main brand color
+          600: '#0052cc',  // Primary buttons
+          700: '#003d99',  // Dark primary
+          800: '#002966',  // Darker primary
+          900: '#001433',  // Very dark primary
+          950: '#000a1a',  // Nearly black primary
         },
-        // Accent color for CTAs and highlights
+        // Accent color - Cyber green with security connotations
         accent: {
-          25: '#fefbff', // Ultra-light for subtle backgrounds
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
-          950: '#4a044e',
+          25: '#f0fff4',   // Light mode subtle
+          50: '#e6ffed',   // Light mode cards
+          100: '#ccffdb',  // Light mode hover
+          200: '#99ffb7',  // Light accents
+          300: '#66ff93',  // Interactive
+          400: '#33ff6f',  // Bright accent
+          500: '#00ff4b',  // Main accent
+          600: '#00cc3c',  // Accent buttons
+          700: '#00992d',  // Dark accent
+          800: '#00661e',  // Darker accent
+          900: '#00330f',  // Very dark accent
+          950: '#001a08',  // Nearly black accent
         },
-        // Neutral grays with enhanced accessibility
+        // Sophisticated neutral palette
         gray: {
-          25: '#fdfdfd', // Ultra-light for subtle backgrounds
-          50: '#f9fafb',
-          100: '#f3f4f6',
-          200: '#e5e7eb',
-          300: '#d1d5db',  
-          400: '#9ca3af',
-          500: '#6b7280',
-          600: '#4b5563',
-          700: '#374151',
-          800: '#1f2937',
-          900: '#111827',
-          950: '#030712',
+          25: '#fefefe',   // Light mode pure
+          50: '#f8fafc',   // Light mode backgrounds
+          100: '#f1f5f9',  // Light mode cards
+          200: '#e2e8f0',  // Light mode borders
+          300: '#cbd5e1',  // Light mode muted
+          400: '#94a3b8',  // Light mode text secondary
+          500: '#64748b',  // Balanced middle
+          600: '#475569',  // Dark mode text secondary
+          700: '#334155',  // Dark mode borders
+          800: '#1e293b',  // Dark mode cards
+          900: '#0f172a',  // Dark mode backgrounds
+          950: '#020617',  // Dark mode pure
         },
-        // Semantic colors with enhanced accessibility
+        // Dark mode specific colors
+        dark: {
+          bg: {
+            primary: '#0a0f1c',     // Main background
+            secondary: '#111827',   // Card backgrounds
+            tertiary: '#1f2937',    // Elevated surfaces
+          },
+          text: {
+            primary: '#f8fafc',     // Main text
+            secondary: '#cbd5e1',   // Secondary text
+            tertiary: '#94a3b8',    // Muted text
+          },
+          border: {
+            primary: '#334155',     // Main borders
+            secondary: '#475569',   // Subtle borders
+          }
+        },
+        // Light mode specific colors (sophisticated, not vanilla)
+        light: {
+          bg: {
+            primary: '#fefefe',     // Main background (off-white)
+            secondary: '#f8fafc',   // Card backgrounds
+            tertiary: '#f1f5f9',    // Elevated surfaces
+          },
+          text: {
+            primary: '#0f172a',     // Main text
+            secondary: '#334155',   // Secondary text
+            tertiary: '#64748b',    // Muted text
+          },
+          border: {
+            primary: '#e2e8f0',     // Main borders
+            secondary: '#cbd5e1',   // Subtle borders
+          }
+        },
+        // Semantic colors - cybersecurity focused
         success: {
           50: '#f0fdf4',
           100: '#dcfce7',
-          500: '#10b981',
-          600: '#059669',
-          700: '#047857',
+          200: '#bbf7d0',
+          300: '#86efac',
+          400: '#4ade80',
+          500: '#22c55e',  // Secure/safe
+          600: '#16a34a',
+          700: '#15803d',
+          800: '#166534',
+          900: '#14532d',
         },
         warning: {
           50: '#fffbeb',
           100: '#fef3c7',
-          500: '#f59e0b',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#f59e0b',  // Caution/alert
           600: '#d97706',
           700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
         },
         error: {
           50: '#fef2f2',
           100: '#fee2e2',
-          500: '#ef4444',
+          200: '#fecaca',
+          300: '#fca5a5',
+          400: '#f87171',
+          500: '#ef4444',  // Danger/threat
           600: '#dc2626',
           700: '#b91c1c',
+          800: '#991b1b',
+          900: '#7f1d1d',
+        },
+        // Cybersecurity specific colors
+        threat: {
+          50: '#fef2f2',
+          100: '#fee2e2',
+          500: '#dc2626',  // High threat
+          600: '#b91c1c',
+          700: '#991b1b',
+        },
+        secure: {
+          50: '#f0fdf4',
+          100: '#dcfce7',
+          500: '#22c55e',  // Secure state
+          600: '#16a34a',
+          700: '#15803d',
+        },
+        neutral: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          500: '#64748b',  // Unknown/neutral
+          600: '#475569',
+          700: '#334155',
         },
       },
       fontFamily: {

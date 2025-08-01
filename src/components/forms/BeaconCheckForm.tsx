@@ -145,20 +145,29 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
     return (
       <Card variant="elevated" className={`max-w-2xl mx-auto text-center ${className}`}>
         <div className="py-12">
-          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <div 
+            className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
+            style={{ backgroundColor: 'rgba(34, 197, 94, 0.1)' }}
+          >
             <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          <h3 className="text-2xl font-bold mb-4" style={{ color: 'var(--color-text-primary)' }}>
             Your Beacon Check is Processing
           </h3>
-          <p className="text-gray-600 mb-6 leading-relaxed">
+          <p className="mb-6 leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
             We're analyzing your message across multiple AI models. You'll receive 
             detailed results via email within the next few minutes.
           </p>
-          <div className="bg-primary-50 rounded-lg p-4 border border-primary-200">
-            <p className="text-sm text-primary-800">
+          <div 
+            className="rounded-lg p-4 border"
+            style={{
+              backgroundColor: 'var(--color-primary-light)',
+              borderColor: 'var(--color-primary)'
+            }}
+          >
+            <p className="text-sm" style={{ color: 'var(--color-primary)' }}>
               <strong>Next steps:</strong> Check your email for the complete analysis including 
               alignment scores, blip detection, and optimization recommendations.
             </p>
@@ -171,11 +180,14 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
   return (
     <Card variant="elevated" className={`max-w-2xl mx-auto ${className}`}>
       <div className="mb-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-          <span className="w-3 h-3 bg-primary-500 rounded-full mr-3 animate-pulse" />
+        <h3 className="text-2xl font-bold mb-4 flex items-center" style={{ color: 'var(--color-text-primary)' }}>
+          <span 
+            className="w-3 h-3 rounded-full mr-3 animate-pulse"
+            style={{ backgroundColor: 'var(--color-primary)' }}
+          />
           Run Your Free Beacon Check
         </h3>
-        <p className="text-gray-600 leading-relaxed">
+        <p className="leading-relaxed" style={{ color: 'var(--color-text-secondary)' }}>
           We'd love to hear from you! Please fill out the form and we'll get back to you as soon as possible.
         </p>
       </div>
@@ -221,7 +233,8 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
           <div>
             <label 
               htmlFor="firstName" 
-              className="block text-sm font-semibold text-gray-900 mb-2"
+              className="block text-sm font-semibold mb-2"
+              style={{ color: 'var(--color-text-primary)' }}
             >
               First Name *
             </label>
@@ -244,7 +257,8 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
           <div>
             <label 
               htmlFor="lastName" 
-              className="block text-sm font-semibold text-gray-900 mb-2"
+              className="block text-sm font-semibold mb-2"
+              style={{ color: 'var(--color-text-primary)' }}
             >
               Last Name
             </label>
@@ -263,7 +277,8 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
         <div>
           <label 
             htmlFor="email" 
-            className="block text-sm font-semibold text-gray-900 mb-2"
+            className="block text-sm font-semibold mb-2"
+            style={{ color: 'var(--color-text-primary)' }}
           >
             Email Address *
           </label>
@@ -282,7 +297,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
             </p>
           )}
           {!errors.email && (
-            <p id="email-help" className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
               We'll send your analysis results here
             </p>
           )}
@@ -293,7 +308,8 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
           <div>
             <label 
               htmlFor="company" 
-              className="block text-sm font-semibold text-gray-900 mb-2"
+              className="block text-sm font-semibold mb-2"
+              style={{ color: 'var(--color-text-primary)' }}
             >
               Company *
             </label>
@@ -316,7 +332,8 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
           <div>
             <label 
               htmlFor="role" 
-              className="block text-sm font-semibold text-gray-900 mb-2"
+              className="block text-sm font-semibold mb-2"
+              style={{ color: 'var(--color-text-primary)' }}
             >
               Job Title
             </label>
@@ -335,7 +352,8 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
         <div>
           <label 
             htmlFor="beacon" 
-            className="block text-sm font-semibold text-gray-900 mb-2"
+            className="block text-sm font-semibold mb-2"
+            style={{ color: 'var(--color-text-primary)' }}
           >
             Your Beacon *
           </label>
@@ -355,7 +373,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
             </p>
           )}
           {!errors.beacon && (
-            <p id="beacon-help" className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm" style={{ color: 'var(--color-text-tertiary)' }}>
               {formData.beacon.length}/1000 characters
             </p>
           )}
@@ -374,7 +392,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
               aria-describedby={errors.consent ? 'consent-error' : 'consent-help'}
             />
             <div>
-              <span className="text-sm text-gray-700">
+              <span className="text-sm" style={{ color: 'var(--color-text-secondary)' }}>
                 I agree to allow Narradar to store and process my personal data to provide the analysis results and occasional updates about APO insights. 
                 <span className="text-red-500 ml-1">*</span>
               </span>
@@ -384,7 +402,7 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
                 </p>
               )}
               {!errors.consent && (
-                <p id="consent-help" className="mt-1 text-xs text-gray-500">
+                <p className="mt-1 text-xs" style={{ color: 'var(--color-text-tertiary)' }}>
                   We respect your privacy. No spam, unsubscribe anytime.
                 </p>
               )}
@@ -413,8 +431,14 @@ export function BeaconCheckForm({ className = '' }: BeaconCheckFormProps) {
           </Button>
           
           {leadScore && (
-            <div className="mt-4 p-3 bg-primary-50 rounded-lg border border-primary-200">
-              <p className="text-sm text-primary-800">
+            <div 
+              className="mt-4 p-3 rounded-lg border"
+              style={{
+                backgroundColor: 'var(--color-primary-light)',
+                borderColor: 'var(--color-primary)'
+              }}
+            >
+              <p className="text-sm" style={{ color: 'var(--color-primary)' }}>
                 <strong>Lead Quality Score:</strong> {leadScore.total}/100 (Grade {leadScore.grade})
               </p>
             </div>

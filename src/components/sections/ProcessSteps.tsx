@@ -43,37 +43,139 @@ const steps = [
 
 export function ProcessSteps() {
   return (
-    <section className="py-16 bg-gray-50">
-      <div className="container-wide">
-        <div className="text-center mb-12">
-          <h2 className="heading-lg text-gray-900 mb-4">How it works</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+    <section className="py-20 relative overflow-hidden">
+      {/* Background with subtle pattern */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          backgroundColor: 'var(--color-bg-secondary)',
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(var(--color-primary-rgb, 0, 102, 255), 0.03) 0%, transparent 50%),
+                           radial-gradient(circle at 75% 75%, rgba(var(--color-accent-rgb, 0, 255, 75), 0.02) 0%, transparent 50%)`
+        }}
+      />
+      
+      {/* Subtle grid overlay */}
+      <div 
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.02]"
+        style={{
+          backgroundImage: `linear-gradient(90deg, var(--color-border-primary) 1px, transparent 1px), linear-gradient(var(--color-border-primary) 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
+      
+      <div className="container-wide relative z-10">
+        <div className="text-center mb-16">
+          <div 
+            className="inline-flex items-center px-4 py-2 rounded-full border text-xs font-semibold mb-6 tracking-wide uppercase"
+            style={{ 
+              backgroundColor: 'var(--color-bg-primary)',
+              borderColor: 'var(--color-border-primary)',
+              color: 'var(--color-text-tertiary)'
+            }}
+          >
+            Process
+          </div>
+          <h2 
+            className="heading-lg mb-6 font-bold"
+            style={{ color: 'var(--color-text-primary)' }}
+          >
+            How it works
+          </h2>
+          <p 
+            className="text-xl max-w-3xl mx-auto font-medium"
+            style={{ color: 'var(--color-text-secondary)' }}
+          >
             Four simple steps to understand and optimize your message across AI models
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((step, index) => (
-            <div key={index} className="text-center">
-              <div className="relative mb-8">
-                <div className="w-20 h-20 bg-white rounded-2xl shadow-lg flex items-center justify-center mx-auto border border-gray-200">
-                  <div className="text-primary-600">
-                    {step.icon}
+        <div className="relative">
+          {/* Connection line for desktop */}
+          <div className="hidden lg:block absolute top-[4.5rem] left-0 right-0 h-px z-0">
+            <div 
+              className="h-full mx-auto opacity-30"
+              style={{ 
+                width: 'calc(100% - 10rem)',
+                background: `linear-gradient(90deg, 
+                  transparent 0%, 
+                  var(--color-primary) 25%, 
+                  var(--color-primary) 75%, 
+                  transparent 100%)`
+              }}
+            />
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+            {steps.map((step, index) => (
+              <div key={index} className="text-center group cursor-default relative z-10">
+                <div className="relative mb-8">
+                  {/* Enhanced icon container */}
+                  <div 
+                    className="w-24 h-24 rounded-3xl shadow-xl flex items-center justify-center mx-auto border-2 transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl relative overflow-hidden"
+                    style={{
+                      backgroundColor: 'var(--color-bg-primary)',
+                      borderColor: 'var(--color-primary)',
+                      boxShadow: '0 10px 25px rgba(var(--color-primary-rgb, 0, 102, 255), 0.15)'
+                    }}
+                  >
+                    {/* Inner glow */}
+                    <div 
+                      className="absolute inset-0 rounded-3xl opacity-20"
+                      style={{
+                        background: `radial-gradient(circle at center, var(--color-primary) 0%, transparent 70%)`
+                      }}
+                    />
+                    
+                    <div 
+                      className="relative z-10 transition-transform duration-300 group-hover:scale-110"
+                      style={{ color: 'var(--color-primary)' }}
+                    >
+                      {step.icon}
+                    </div>
+                  </div>
+                  
+                  {/* Enhanced step number */}
+                  <div 
+                    className="absolute -top-3 -right-3 w-10 h-10 text-white rounded-2xl flex items-center justify-center text-sm font-black shadow-lg transition-all duration-300 group-hover:scale-110"
+                    style={{ 
+                      backgroundColor: 'var(--color-primary)',
+                      boxShadow: '0 4px 12px rgba(var(--color-primary-rgb, 0, 102, 255), 0.4)'
+                    }}
+                  >
+                    {step.number}
                   </div>
                 </div>
-                <div className="absolute -top-2 -right-2 w-8 h-8 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                  {step.number}
+                
+                <div className="px-2">
+                  <h3 
+                    className="heading-sm mb-4 font-bold"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
+                    {step.title}
+                  </h3>
+                  <p 
+                    className="leading-relaxed text-base font-medium"
+                    style={{ color: 'var(--color-text-secondary)' }}
+                  >
+                    {step.description}
+                  </p>
                 </div>
+                
+                {/* Step connection indicator */}
+                {index < steps.length - 1 && (
+                  <div className="hidden lg:block absolute top-12 left-full w-8 flex justify-center z-20">
+                    <div 
+                      className="w-3 h-3 rounded-full border-2 animate-pulse"
+                      style={{ 
+                        backgroundColor: 'var(--color-bg-primary)',
+                        borderColor: 'var(--color-primary)'
+                      }}
+                    />
+                  </div>
+                )}
               </div>
-              
-              <h3 className="heading-sm text-gray-900 mb-4">{step.title}</h3>
-              <p className="text-gray-600 leading-relaxed text-sm">{step.description}</p>
-              
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-10 left-1/2 transform translate-x-8 w-16 h-0.5 bg-gray-300"></div>
-              )}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

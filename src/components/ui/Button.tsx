@@ -37,11 +37,11 @@ const Button = ({
   const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
   
   const variantClasses = {
-    primary: 'bg-primary-600 text-white border-transparent hover:bg-primary-700 focus:ring-primary-500 shadow-sm hover:shadow-md',
-    secondary: 'bg-white text-gray-900 border-gray-300 hover:bg-gray-50 focus:ring-primary-500 shadow-sm hover:shadow-md',
-    accent: 'bg-accent-600 text-white border-transparent hover:bg-accent-700 focus:ring-accent-500 shadow-sm hover:shadow-md',
-    ghost: 'bg-transparent text-gray-700 border-transparent hover:bg-gray-100 hover:text-gray-900 focus:ring-primary-500',
-    outline: 'bg-transparent text-primary-700 border-primary-300 hover:bg-primary-50 focus:ring-primary-500'
+    primary: 'border-transparent shadow-sm hover:shadow-md focus:ring-2',
+    secondary: 'shadow-sm hover:shadow-md focus:ring-2',
+    accent: 'border-transparent shadow-sm hover:shadow-md focus:ring-2',
+    ghost: 'bg-transparent border-transparent focus:ring-2',
+    outline: 'bg-transparent border focus:ring-2'
   }
 
   const sizeClasses = {
@@ -52,6 +52,49 @@ const Button = ({
   }
 
   const widthClasses = fullWidth ? 'w-full' : ''
+
+  // Dynamic styles using CSS variables for theme support
+  const getVariantStyles = (variant: string) => {
+    switch (variant) {
+      case 'primary':
+        return {
+          backgroundColor: 'var(--color-primary)',
+          color: 'var(--color-text-primary)',
+          borderColor: 'transparent',
+          '--tw-ring-color': 'var(--color-primary)'
+        }
+      case 'secondary':
+        return {
+          backgroundColor: 'var(--color-bg-secondary)',
+          color: 'var(--color-text-primary)',
+          borderColor: 'var(--color-border-primary)',
+          '--tw-ring-color': 'var(--color-primary)'
+        }
+      case 'accent':
+        return {
+          backgroundColor: 'var(--color-accent)',
+          color: 'var(--color-text-primary)',
+          borderColor: 'transparent',
+          '--tw-ring-color': 'var(--color-accent)'
+        }
+      case 'ghost':
+        return {
+          backgroundColor: 'transparent',
+          color: 'var(--color-text-secondary)',
+          borderColor: 'transparent',
+          '--tw-ring-color': 'var(--color-primary)'
+        }
+      case 'outline':
+        return {
+          backgroundColor: 'transparent',
+          color: 'var(--color-primary)',
+          borderColor: 'var(--color-primary)',
+          '--tw-ring-color': 'var(--color-primary)'
+        }
+      default:
+        return {}
+    }
+  }
 
   const classes = `
     ${baseClasses} 
@@ -96,6 +139,7 @@ const Button = ({
         <a
           href={href}
           className={classes}
+          style={getVariantStyles(variant)}
           target="_blank"
           rel="noopener noreferrer"
           {...(linkProps as any)}
@@ -106,7 +150,7 @@ const Button = ({
     }
 
     return (
-      <Link href={href} className={classes} {...(linkProps as any)}>
+      <Link href={href} className={classes} style={getVariantStyles(variant)} {...(linkProps as any)}>
         {content}
       </Link>
     )
@@ -115,6 +159,7 @@ const Button = ({
   return (
     <button 
       className={classes} 
+      style={getVariantStyles(variant)}
       disabled={disabled || loading}
       {...(props as ButtonHTMLAttributes<HTMLButtonElement>)}
     >

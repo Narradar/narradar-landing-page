@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 const navigation = [
   { name: 'APO', href: '/apo' },
@@ -57,11 +58,15 @@ export function Header() {
 
   return (
     <header 
-      className={`sticky top-0 z-50 bg-white/95 backdrop-blur-sm transition-all duration-300 ${
+      className={`sticky top-0 z-50 backdrop-blur-sm transition-all duration-300 ${
         isScrolled 
-          ? 'border-b border-gray-200 shadow-sm' 
+          ? 'border-b shadow-sm' 
           : 'border-b border-transparent'
       }`}
+      style={{
+        backgroundColor: 'var(--color-bg-primary)',
+        borderBottomColor: isScrolled ? 'var(--color-border-primary)' : 'transparent'
+      }}
     >
       <nav className="container-wide" aria-label="Global navigation">
         <div className="flex items-center justify-between h-16 lg:h-18">
@@ -72,10 +77,18 @@ export function Header() {
               className="flex items-center space-x-3 group focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 rounded-lg p-1 -m-1"
               aria-label="Narradar home"
             >
-              <div className="w-9 h-9 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105">
-                <span className="text-white font-bold text-lg">N</span>
+              <div 
+                className="w-9 h-9 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105"
+                style={{ 
+                  background: 'linear-gradient(135deg, var(--color-primary), var(--color-primary-hover))'
+                }}
+              >
+                <span className="font-bold text-lg" style={{ color: 'var(--color-text-primary)' }}>N</span>
               </div>
-              <span className="text-xl font-bold text-gray-900 group-hover:text-primary-700 transition-colors">
+              <span 
+                className="text-xl font-bold transition-colors group-hover:opacity-80"
+                style={{ color: 'var(--color-text-primary)' }}
+              >
                 Narradar
               </span>
             </Link>
@@ -89,14 +102,31 @@ export function Header() {
                 href={item.href}
                 className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 relative ${
                   pathname === item.href
-                    ? 'text-primary-700 bg-primary-50'
-                    : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'
+                    ? 'opacity-100'
+                    : 'opacity-70 hover:opacity-100'
                 }`}
+                style={{
+                  color: 'var(--color-text-primary)',
+                  backgroundColor: pathname === item.href ? 'var(--color-bg-secondary)' : 'transparent'
+                }}
+                onMouseEnter={(e) => {
+                  if (pathname !== item.href) {
+                    e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (pathname !== item.href) {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                  }
+                }}
                 aria-current={pathname === item.href ? 'page' : undefined}
               >
                 {item.name}
                 {pathname === item.href && (
-                  <span className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-primary-600 rounded-full" />
+                  <span 
+                    className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 rounded-full" 
+                    style={{ backgroundColor: 'var(--color-primary)' }}
+                  />
                 )}
               </Link>
             ))}
@@ -108,7 +138,14 @@ export function Header() {
                 href={item.href}
                 target={item.target}
                 rel="noopener noreferrer"
-                className="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-gray-700 hover:text-primary-700 hover:bg-gray-50 flex items-center space-x-1"
+                className="px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 flex items-center space-x-1 opacity-70 hover:opacity-100"
+                style={{ color: 'var(--color-text-primary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }}
               >
                 <span>{item.name}</span>
                 <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,8 +155,9 @@ export function Header() {
             ))}
           </div>
 
-          {/* Desktop CTA Button */}
+          {/* Desktop CTA Button and Theme Toggle */}
           <div className="hidden lg:flex items-center space-x-4">
+            <ThemeToggle />
             <Link
               href="#beacon-check"
               className="btn-primary px-6 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md transition-shadow"
@@ -128,11 +166,22 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <div className="lg:hidden">
+          {/* Mobile menu button and theme toggle */}
+          <div className="lg:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <button
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500 transition-colors"
+              className="inline-flex items-center justify-center p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-inset transition-colors opacity-70 hover:opacity-100"
+              style={{ 
+                color: 'var(--color-text-primary)',
+                backgroundColor: 'transparent'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent'
+              }}
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
@@ -185,16 +234,37 @@ export function Header() {
               : 'max-h-0 opacity-0 overflow-hidden'
           }`}
         >
-          <div className="px-2 pt-4 pb-6 space-y-2 bg-white border-t border-gray-100 shadow-lg">
+          <div 
+            className="px-2 pt-4 pb-6 space-y-2 border-t shadow-lg"
+            style={{ 
+              backgroundColor: 'var(--color-bg-primary)',
+              borderTopColor: 'var(--color-border-primary)'
+            }}
+          >
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 className={`block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
                   pathname === item.href
-                    ? 'text-primary-700 bg-primary-50 border-l-4 border-primary-600'
-                    : 'text-gray-700 hover:text-primary-700 hover:bg-gray-50'
+                    ? 'border-l-4 opacity-100'
+                    : 'opacity-70 hover:opacity-100'
                 }`}
+                style={{
+                  color: 'var(--color-text-primary)',
+                  backgroundColor: pathname === item.href ? 'var(--color-bg-secondary)' : 'transparent',
+                  borderLeftColor: pathname === item.href ? 'var(--color-primary)' : 'transparent'
+                }}
+                onMouseEnter={(e) => {
+                  if (pathname !== item.href) {
+                    e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (pathname !== item.href) {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                  }
+                }}
                 onClick={() => setMobileMenuOpen(false)}
                 aria-current={pathname === item.href ? 'page' : undefined}
               >
@@ -209,7 +279,14 @@ export function Header() {
                 href={item.href}
                 target={item.target}
                 rel="noopener noreferrer"
-                className="block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 text-gray-700 hover:text-primary-700 hover:bg-gray-50"
+                className="block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 opacity-70 hover:opacity-100"
+                style={{ color: 'var(--color-text-primary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'transparent'
+                }}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 <div className="flex items-center space-x-2">
@@ -221,7 +298,10 @@ export function Header() {
               </a>
             ))}
             
-            <div className="pt-4 border-t border-gray-100">
+            <div 
+              className="pt-4 border-t"
+              style={{ borderTopColor: 'var(--color-border-primary)' }}
+            >
               <Link
                 href="#beacon-check"
                 className="btn-primary w-full justify-center py-3 text-base font-semibold"

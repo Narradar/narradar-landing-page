@@ -51,31 +51,48 @@ export function FAQSection() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       
-      <section className="py-16 bg-gray-50">
+      <section className="py-16" style={{ backgroundColor: 'var(--color-bg-secondary)' }}>
         <div className="container-narrow">
           <div className="text-center mb-12">
-            <h2 className="heading-lg text-gray-900 mb-4">Frequently asked questions</h2>
-            <p className="text-xl text-gray-600">
+            <h2 className="heading-lg mb-4" style={{ color: 'var(--color-text-primary)' }}>Frequently asked questions</h2>
+            <p className="text-xl" style={{ color: 'var(--color-text-secondary)' }}>
               Learn more about Agent Perception Optimization and how it can help your brand
             </p>
           </div>
 
           <div className="space-y-4">
             {faqs.map((faq) => (
-              <div key={faq.id} className="bg-white border border-gray-200 rounded-lg">
+              <div 
+                key={faq.id} 
+                className="border rounded-lg"
+                style={{
+                  backgroundColor: 'var(--color-bg-primary)',
+                  borderColor: 'var(--color-border-primary)'
+                }}
+              >
                 <button
                   onClick={() => toggleFaq(faq.id)}
-                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-inset"
+                  className="w-full px-6 py-4 text-left flex justify-between items-center focus:outline-none focus:ring-2 focus:ring-inset transition-colors"
+                  style={{
+                    color: 'var(--color-text-primary)'
+                  } as React.CSSProperties}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--color-bg-secondary)'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent'
+                  }}
                   aria-expanded={openFaq === faq.id}
                 >
-                  <span className="font-semibold text-gray-900">{faq.question}</span>
+                  <span className="font-semibold" style={{ color: 'var(--color-text-primary)' }}>{faq.question}</span>
                   <svg
-                    className={`w-5 h-5 text-gray-500 transition-transform ${
+                    className={`w-5 h-5 transition-transform ${
                       openFaq === faq.id ? 'rotate-180' : ''
                     }`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
+                    style={{ color: 'var(--color-text-tertiary)' }}
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
@@ -83,10 +100,17 @@ export function FAQSection() {
                 
                 {openFaq === faq.id && (
                   <div className="px-6 pb-4">
-                    <p className="text-gray-600 leading-relaxed mb-4">{faq.answer}</p>
+                    <p className="leading-relaxed mb-4" style={{ color: 'var(--color-text-secondary)' }}>{faq.answer}</p>
                     <Link
                       href={faq.link}
-                      className="text-primary-600 hover:text-primary-700 font-medium text-sm"
+                      className="font-medium text-sm transition-colors"
+                      style={{ color: 'var(--color-primary)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'var(--color-primary-hover)'
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'var(--color-primary)'
+                      }}
                     >
                       Learn more →
                     </Link>

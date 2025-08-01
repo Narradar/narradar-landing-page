@@ -6,6 +6,7 @@ interface CardProps {
   padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl'
   hover?: boolean
   className?: string
+  style?: React.CSSProperties
 }
 
 interface CardHeaderProps {
@@ -28,15 +29,72 @@ const Card = ({
   variant = 'default', 
   padding = 'md', 
   hover = false,
-  className = '' 
+  className = '',
+  style = {}
 }: CardProps) => {
   const baseClasses = 'rounded-xl transition-all duration-200'
   
+  // Theme-aware variant classes using CSS variables
   const variantClasses = {
-    default: 'bg-white border border-gray-200',
-    elevated: 'bg-white shadow-sm border border-gray-100',
-    bordered: 'bg-white border-2 border-gray-200',
-    glass: 'bg-white/80 backdrop-blur-sm border border-gray-200/50'
+    default: 'border shadow-sm',
+    elevated: 'shadow-lg border-2',
+    bordered: 'border-2 shadow-sm',
+    glass: 'backdrop-blur-md border shadow-xl'
+  }
+
+  // Enhanced dynamic styles with better dark mode support
+  const getVariantStyles = (variant: string) => {
+    const baseStyle = {
+      backgroundColor: 'var(--color-bg-secondary)',
+      borderColor: 'var(--color-border-primary)',
+      color: 'var(--color-text-primary)',
+      position: 'relative' as const,
+      overflow: 'hidden' as const
+    }
+
+    switch (variant) {
+      case 'elevated':
+        return {
+          ...baseStyle,
+          borderColor: 'var(--color-primary)',
+          borderWidth: '2px',
+          boxShadow: `
+            0 10px 25px -5px rgba(0, 0, 0, 0.1),
+            0 8px 10px -6px rgba(0, 0, 0, 0.1),
+            0 0 0 1px rgba(var(--color-border-primary-rgb, 226, 232, 240), 0.05)
+          `
+        }
+      case 'bordered':
+        return {
+          ...baseStyle,
+          borderWidth: '2px',
+          borderColor: 'var(--color-border-secondary)',
+          boxShadow: `
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 1px 3px rgba(0, 0, 0, 0.1)
+          `
+        }
+      case 'glass':
+        return {
+          backgroundColor: 'rgba(var(--color-bg-tertiary-rgb, 241, 245, 249), 0.8)',
+          borderColor: 'rgba(var(--color-border-secondary-rgb, 203, 213, 225), 0.8)',
+          color: 'var(--color-text-primary)',
+          backdropFilter: 'blur(12px)',
+          boxShadow: `
+            0 25px 50px -12px rgba(0, 0, 0, 0.25),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1)
+          `
+        }
+      default:
+        return {
+          ...baseStyle,
+          boxShadow: `
+            0 1px 3px rgba(0, 0, 0, 0.1),
+            0 1px 2px rgba(0, 0, 0, 0.06),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05)
+          `
+        }
+    }
   }
 
   const paddingClasses = {
@@ -48,8 +106,8 @@ const Card = ({
   }
 
   const hoverClasses = hover 
-    ? 'hover:shadow-md hover:shadow-gray-100 hover:-translate-y-0.5 cursor-pointer' 
-    : ''
+    ? 'hover:shadow-2xl hover:-translate-y-1 cursor-pointer transition-all duration-300 hover:scale-[1.02] group' 
+    : 'transition-all duration-200'
 
   return (
     <div 
@@ -60,8 +118,20 @@ const Card = ({
         ${hoverClasses} 
         ${className}
       `}
+      style={{...getVariantStyles(variant), ...style}}
     >
-      {children}
+      {/* Subtle inner glow for premium feel */}
+      <div 
+        className="absolute inset-0 rounded-xl opacity-30 pointer-events-none"
+        style={{
+          background: `radial-gradient(circle at 50% 0%, rgba(var(--color-primary-rgb, 0, 102, 255), 0.05) 0%, transparent 50%)`
+        }}
+      />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        {children}
+      </div>
     </div>
   )
 }
@@ -79,7 +149,10 @@ const CardBody = ({ children, className = '' }: CardBodyProps) => (
 )
 
 const CardFooter = ({ children, className = '' }: CardFooterProps) => (
-  <div className={`mt-6 pt-4 border-t border-gray-100 ${className}`}>
+  <div 
+    className={`mt-6 pt-4 border-t ${className}`}
+    style={{ borderTopColor: 'var(--color-border-primary)' }}
+  >
     {children}
   </div>
 )

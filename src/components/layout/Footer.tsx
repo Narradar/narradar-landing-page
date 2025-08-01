@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { Button } from '@/components/ui'
 
@@ -58,19 +60,48 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-gray-950" aria-labelledby="footer-heading">
+    <footer 
+      className="relative overflow-hidden"
+      style={{
+        background: `linear-gradient(180deg, 
+          var(--color-bg-secondary) 0%, 
+          var(--color-bg-tertiary) 100%)`
+      }}
+      aria-labelledby="footer-heading"
+    >
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
       
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div 
+          className="absolute top-0 left-1/4 w-96 h-96 rounded-full filter blur-3xl opacity-[0.03] dark:opacity-[0.05]"
+          style={{ backgroundColor: 'var(--color-primary)' }}
+        />
+        <div 
+          className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full filter blur-3xl opacity-[0.02] dark:opacity-[0.03]"
+          style={{ backgroundColor: 'var(--color-accent)' }}
+        />
+      </div>
+      
       {/* Newsletter/CTA Section */}
-      <div className="border-b border-gray-800">
+      <div 
+        className="border-b relative z-10"
+        style={{ borderBottomColor: 'var(--color-border-primary)' }}
+      >
         <div className="container-wide py-12 lg:py-16">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="heading-md text-white mb-4">
+            <h3 
+              className="heading-md mb-4 font-bold"
+              style={{ color: 'var(--color-text-primary)' }}
+            >
               Stay ahead of AI perception shifts
             </h3>
-            <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+            <p 
+              className="text-lg mb-8 leading-relaxed font-medium"
+              style={{ color: 'var(--color-text-secondary)' }}
+            >
               Get insights on semantic drift, APO strategies, and AI model updates 
               delivered to your inbox monthly.
             </p>
@@ -78,17 +109,25 @@ export function Footer() {
               <input
                 type="email"
                 placeholder="your.email@company.com"
-                className="form-input bg-gray-800 border-gray-700 text-white placeholder-gray-400 focus:border-primary-400 focus:ring-primary-400"
+                className="form-input flex-1"
+                style={{
+                  backgroundColor: 'var(--color-bg-primary)',
+                  borderColor: 'var(--color-border-primary)',
+                  color: 'var(--color-text-primary)'
+                }}
                 aria-label="Email address for newsletter"
               />
               <Button 
                 variant="primary" 
-                className="whitespace-nowrap px-6"
+                className="whitespace-nowrap px-8 py-3 font-semibold shadow-lg hover:shadow-xl transition-shadow"
               >
                 Subscribe
               </Button>
             </div>
-            <p className="text-xs text-gray-500 mt-4">
+            <p 
+              className="text-xs mt-4 font-medium"
+              style={{ color: 'var(--color-text-tertiary)' }}
+            >
               No spam. Unsubscribe anytime. SOC 2 Type II compliant.
             </p>
           </div>
@@ -96,42 +135,79 @@ export function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="container-wide py-16 lg:py-20">
+      <div className="container-wide py-16 lg:py-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-8">
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-8">
             <div>
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center">
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+                  style={{
+                    background: `linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%)`
+                  }}
+                >
                   <span className="text-white font-bold text-xl">N</span>
                 </div>
-                <span className="text-2xl font-bold text-white">Narradar</span>
+                <span 
+                  className="text-2xl font-bold"
+                  style={{ color: 'var(--color-text-primary)' }}
+                >
+                  Narradar
+                </span>
               </div>
-              <p className="text-gray-300 text-lg leading-relaxed max-w-md">
+              <p 
+                className="text-lg leading-relaxed max-w-md font-medium"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
                 The first Agent Perception Optimization platform. Control your narrative 
                 in the AI multiverse and maintain brand consistency across all AI interpretations.
               </p>
             </div>
 
             {/* Key Stats */}
-            <div className="grid grid-cols-3 gap-6 py-6 border-t border-gray-800">
-              <div>
-                <div className="text-2xl font-bold text-primary-400">4+</div>
-                <div className="text-sm text-gray-400">AI Models</div>
+            <div 
+              className="grid grid-cols-3 gap-6 py-6 border-t"
+              style={{ borderTopColor: 'var(--color-border-primary)' }}
+            >
+              <div className="text-center">
+                <div 
+                  className="text-3xl font-black mb-1"
+                  style={{ color: 'var(--color-primary)' }}
+                >4+</div>
+                <div 
+                  className="text-xs font-semibold tracking-wide uppercase"
+                  style={{ color: 'var(--color-text-tertiary)' }}
+                >AI Models</div>
               </div>
-              <div>
-                <div className="text-2xl font-bold text-primary-400">15+</div>
-                <div className="text-sm text-gray-400">Blip Types</div>
+              <div className="text-center">
+                <div 
+                  className="text-3xl font-black mb-1"
+                  style={{ color: 'var(--color-primary)' }}
+                >15+</div>
+                <div 
+                  className="text-xs font-semibold tracking-wide uppercase"
+                  style={{ color: 'var(--color-text-tertiary)' }}
+                >Blip Types</div>
               </div>
-              <div>
-                <div className="text-2xl font-bold text-primary-400">99%</div>
-                <div className="text-sm text-gray-400">Accuracy</div>
+              <div className="text-center">
+                <div 
+                  className="text-3xl font-black mb-1"
+                  style={{ color: 'var(--color-primary)' }}
+                >99%</div>
+                <div 
+                  className="text-xs font-semibold tracking-wide uppercase"
+                  style={{ color: 'var(--color-text-tertiary)' }}
+                >Accuracy</div>
               </div>
             </div>
 
             {/* Social Links */}
             <div>
-              <h4 className="text-sm font-semibold text-gray-300 mb-4">
+              <h4 
+                className="text-sm font-semibold mb-4 tracking-wide uppercase"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
                 Follow our journey
               </h4>
               <div className="flex space-x-4">
@@ -139,7 +215,22 @@ export function Footer() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-200"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-200 hover:scale-110 border"
+                    style={{
+                      backgroundColor: 'var(--color-bg-primary)',
+                      borderColor: 'var(--color-border-primary)',
+                      color: 'var(--color-text-tertiary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--color-bg-tertiary)'
+                      e.currentTarget.style.color = 'var(--color-primary)'
+                      e.currentTarget.style.borderColor = 'var(--color-primary)'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--color-bg-primary)'
+                      e.currentTarget.style.color = 'var(--color-text-tertiary)'
+                      e.currentTarget.style.borderColor = 'var(--color-border-primary)'
+                    }}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Follow us on ${item.name}`}
@@ -156,7 +247,10 @@ export function Footer() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {Object.entries(footerNavigation).map(([category, links]) => (
                 <div key={category}>
-                  <h3 className="text-sm font-bold text-white tracking-wider uppercase mb-6">
+                  <h3 
+                    className="text-sm font-bold tracking-wider uppercase mb-6"
+                    style={{ color: 'var(--color-text-primary)' }}
+                  >
                     {category === 'platform' ? 'Platform' : 
                      category === 'resources' ? 'Resources' :
                      category === 'company' ? 'Company' : 'Legal'}
@@ -166,7 +260,14 @@ export function Footer() {
                       <li key={item.name}>
                         <Link
                           href={item.href}
-                          className="group text-sm text-gray-400 hover:text-primary-300 transition-colors duration-200"
+                          className="group text-sm transition-colors duration-200 font-medium"
+                          style={{ color: 'var(--color-text-secondary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--color-primary)'
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--color-text-secondary)'
+                          }}
                           title={item.description}
                         >
                           <span className="group-hover:underline">
@@ -183,35 +284,70 @@ export function Footer() {
         </div>
         
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-gray-800">
+        <div 
+          className="mt-16 pt-8 border-t"
+          style={{ borderTopColor: 'var(--color-border-primary)' }}
+        >
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm text-gray-400">
-              <p>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 text-sm">
+              <p style={{ color: 'var(--color-text-tertiary)' }}>
                 &copy; {new Date().getFullYear()} Narradar, Inc. All rights reserved.
               </p>
-              <div className="flex items-center gap-4">
-                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                <span>SOC 2 Type II Compliant</span>
+              <div className="flex items-center gap-3">
+                <span 
+                  className="w-2 h-2 bg-green-400 rounded-full animate-pulse"
+                  style={{ boxShadow: '0 0 6px rgba(34, 197, 94, 0.5)' }}
+                />
+                <span 
+                  className="font-medium"
+                  style={{ color: 'var(--color-text-tertiary)' }}
+                >
+                  SOC 2 Type II Compliant
+                </span>
               </div>
             </div>
             
             <div className="flex flex-wrap items-center gap-6 text-sm">
               <Link 
                 href="/status" 
-                className="text-gray-400 hover:text-primary-300 transition-colors flex items-center gap-2"
+                className="transition-colors flex items-center gap-2 font-medium"
+                style={{ color: 'var(--color-text-tertiary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-primary)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-tertiary)'
+                }}
               >
-                <span className="w-2 h-2 bg-green-400 rounded-full" />
+                <span 
+                  className="w-2 h-2 bg-green-400 rounded-full"
+                  style={{ boxShadow: '0 0 4px rgba(34, 197, 94, 0.5)' }}
+                />
                 System Status
               </Link>
               <Link 
                 href="/changelog" 
-                className="text-gray-400 hover:text-primary-300 transition-colors"
+                className="transition-colors font-medium"
+                style={{ color: 'var(--color-text-tertiary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-primary)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-tertiary)'
+                }}
               >
                 Changelog
               </Link>
               <Link 
                 href="/support" 
-                className="text-gray-400 hover:text-primary-300 transition-colors"
+                className="transition-colors font-medium"
+                style={{ color: 'var(--color-text-tertiary)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--color-primary)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--color-text-tertiary)'
+                }}
               >
                 Support
               </Link>
