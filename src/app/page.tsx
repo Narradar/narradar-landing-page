@@ -1,11 +1,7 @@
 import { Metadata } from 'next'
-import { HeroSection } from '@/components/sections/HeroSection'
-import { AnswerBox } from '@/components/sections/AnswerBox'
-import { FeatureGrid } from '@/components/sections/FeatureGrid'
-import { ProcessSteps } from '@/components/sections/ProcessSteps'
-import { DemoSection } from '@/components/sections/DemoSection'
-import { FAQSection } from '@/components/sections/FAQSection'
-import { CTASection } from '@/components/sections/CTASection'
+import { headers } from 'next/headers'
+import { isAIAgent } from '@/lib/ai-agents'
+import { AIAwarePage } from '@/components/AIAwarePage'
 
 export const metadata: Metadata = {
   title: 'Narradar - Control Your Narrative in the AI Multiverse',
@@ -48,7 +44,12 @@ const websiteJsonLd = {
   },
 }
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Server-side AI agent detection using Next.js headers
+  const headersList = await headers()
+  const userAgent = headersList.get('user-agent') || ''
+  const isAI = isAIAgent(userAgent)
+
   return (
     <>
       <script
@@ -60,13 +61,8 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
       
-      <HeroSection />
-      <AnswerBox />
-      <FeatureGrid />
-      <ProcessSteps />
-      <DemoSection />
-      <FAQSection />
-      <CTASection />
+      {/* AI-aware page rendering */}
+      <AIAwarePage isAIAgent={isAI} />
     </>
   )
 }
