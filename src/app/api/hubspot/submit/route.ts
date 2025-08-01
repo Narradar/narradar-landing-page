@@ -22,6 +22,7 @@ const RATE_LIMIT_CONFIG = {
 const ALLOWED_ORIGINS = [
   'https://www.narradar.com',
   'https://narradar.com',
+  'https://narradar-landing-page.vercel.app',
   process.env.NEXT_PUBLIC_SITE_URL,
   ...(process.env.NODE_ENV === 'development' ? ['http://localhost:3000'] : []),
 ].filter(Boolean);
