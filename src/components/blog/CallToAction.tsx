@@ -62,14 +62,14 @@ export function CallToAction({ variant = 'default', className = '' }: CallToActi
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href={cta.primaryButton.href}
-              className="btn-primary bg-white text-primary-600 hover:bg-gray-50 border-white"
+              className="btn-primary"
             >
               {cta.primaryButton.text}
             </Link>
             
             <Link
               href={cta.secondaryButton.href}
-              className="btn-secondary border-white text-white hover:bg-white hover:text-primary-600"
+              className="btn-secondary"
             >
               {cta.secondaryButton.text}
             </Link>

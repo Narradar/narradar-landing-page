@@ -59,7 +59,8 @@ const Button = ({
       case 'primary':
         return {
           backgroundColor: 'var(--color-primary)',
-          color: 'var(--color-text-primary)',
+          // Ensure sufficient contrast on deep primary backgrounds
+          color: '#ffffff',
           borderColor: 'transparent',
           '--tw-ring-color': 'var(--color-primary)'
         }
@@ -73,7 +74,8 @@ const Button = ({
       case 'accent':
         return {
           backgroundColor: 'var(--color-accent)',
-          color: 'var(--color-text-primary)',
+          // Ensure sufficient contrast on bright accent backgrounds
+          color: '#ffffff',
           borderColor: 'transparent',
           '--tw-ring-color': 'var(--color-accent)'
         }
