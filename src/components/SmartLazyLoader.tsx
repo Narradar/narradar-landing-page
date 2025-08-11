@@ -19,8 +19,10 @@ export function SmartLazyLoader({
   className = '',
   minHeight = '200px'
 }: SmartLazyLoaderProps) {
-  const [shouldRender, setShouldRender] = useState(forceRender)
-  const [isIntersecting, setIsIntersecting] = useState(false)
+  const isServer = typeof window === 'undefined'
+  // On server and when JS is disabled, render content for progressive enhancement
+  const [shouldRender, setShouldRender] = useState<boolean>(forceRender || isServer)
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(forceRender || isServer)
   const placeholderRef = useRef<HTMLDivElement>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
 
