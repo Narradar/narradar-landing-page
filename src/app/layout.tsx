@@ -4,7 +4,7 @@ import './globals.css'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { OrganizationStructuredData, WebSiteStructuredData } from '@/components/seo/StructuredData'
-import { ThemeProvider } from '@/components/theme/ThemeProvider'
+// import { ThemeProvider } from '@/components/theme/ThemeProvider'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -81,10 +81,10 @@ export default function RootLayout({
   const ga4MeasurementId = process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID
   
   return (
-    <html lang="en" className={`${inter.variable} dark`} suppressHydrationWarning>
+    <html lang="en" className={inter.variable}>
       <head>
         {/* Theme color for mobile browsers */}
-        <meta name="theme-color" content="#0a0f1c" />
+        <meta name="theme-color" content="#ffffff" />
         
         {/* Google Analytics 4 */}
         {ga4MeasurementId && (
@@ -126,18 +126,16 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        <ThemeProvider>
-          <a href="#main-content" className="skip-link">
-            Skip to main content
-          </a>
-          <div className="flex flex-col min-h-screen">
-            <Header />
-            <main id="main-content" className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </div>
       </body>
     </html>
   )
