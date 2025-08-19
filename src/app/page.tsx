@@ -11,38 +11,7 @@ export const metadata: Metadata = {
   },
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Narradar',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-  logo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/images/logo.svg`,
-  description: 'Agent Perception Optimization platform that helps brands control their narrative across AI models',
-  sameAs: [
-    'https://twitter.com/narradar',
-    'https://linkedin.com/company/narradar',
-  ],
-  contactPoint: {
-    '@type': 'ContactPoint',
-    contactType: 'customer service',
-    availableLanguage: 'English',
-  },
-}
-
-const websiteJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'WebSite',
-  name: 'Narradar',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: {
-      '@type': 'EntryPoint',
-      urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/search?q={search_term_string}`,
-    },
-    'query-input': 'required name=search_term_string',
-  },
-}
+// Organization and Website structured data are provided globally in RootLayout
 
 export default async function HomePage() {
   // Server-side AI agent detection using Next.js headers
@@ -52,15 +21,6 @@ export default async function HomePage() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-      />
-      
       {/* AI-aware page rendering */}
       <AIAwarePage isAIAgent={isAI} />
     </>

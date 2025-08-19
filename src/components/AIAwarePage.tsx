@@ -11,19 +11,17 @@ import { FeatureGrid } from '@/components/sections/FeatureGrid'
 import { ProcessSteps } from '@/components/sections/ProcessSteps'
 
 // Lazy load these sections with AI-aware fallbacks
+// Keep SSR enabled so AI agents and no-JS users get full HTML
 const DemoSection = dynamic(() => import('@/components/sections/DemoSection').then(mod => ({ default: mod.DemoSection })), {
   loading: () => <DemoSectionSkeleton />,
-  ssr: false // These will be server-rendered for AI agents via forceRender
 })
 
 const FAQSection = dynamic(() => import('@/components/sections/FAQSection').then(mod => ({ default: mod.FAQSection })), {
   loading: () => <FAQSectionSkeleton />,
-  ssr: false
 })
 
 const CTASection = dynamic(() => import('@/components/sections/CTASection').then(mod => ({ default: mod.CTASection })), {
   loading: () => <CTASectionSkeleton />,
-  ssr: false
 })
 
 interface AIAwarePageProps {
@@ -31,7 +29,8 @@ interface AIAwarePageProps {
 }
 
 export function AIAwarePage({ isAIAgent = false }: AIAwarePageProps) {
-  const [mounted, setMounted] = useState(false)
+  // Initialize mounted based on AI detection so AI gets full SSR content
+  const [mounted, setMounted] = useState(isAIAgent)
 
   useEffect(() => {
     setMounted(true)
@@ -46,8 +45,8 @@ export function AIAwarePage({ isAIAgent = false }: AIAwarePageProps) {
     }
   }, [isAIAgent])
 
-  // During hydration, show loading state to prevent flash
-  if (!mounted) {
+  // During hydration, show loading state to prevent flash for humans only
+  if (!mounted && !isAIAgent) {
     return (
       <>
         {/* Critical above-the-fold content - always rendered */}

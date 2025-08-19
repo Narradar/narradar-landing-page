@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { ThemeToggle } from '@/components/theme/ThemeToggle'
+// import { ThemeToggle } from '@/components/theme/ThemeToggle'
 
 const navigation = [
   { name: 'APO', href: '/apo' },
@@ -155,9 +155,9 @@ export function Header() {
             ))}
           </div>
 
-          {/* Desktop CTA Button and Theme Toggle */}
+          {/* Desktop CTA Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <Link
               href="#beacon-check"
               className="btn-primary px-6 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md transition-shadow"
@@ -166,9 +166,9 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Mobile menu button and theme toggle */}
+          {/* Mobile menu button */}
           <div className="lg:hidden flex items-center space-x-2">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <button
               type="button"
               className="inline-flex items-center justify-center p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-inset transition-colors opacity-70 hover:opacity-100"

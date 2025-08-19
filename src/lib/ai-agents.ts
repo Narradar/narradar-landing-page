@@ -72,7 +72,7 @@ export const AI_AGENT_PATTERNS = [
   /PerplexityBot/i,
   /PerplexityAI/i,
   
-  // Other AI services
+  // Other AI/crawler services
   /YouBot/i,
   /copibot/i,
   /DeepSeek/i,
@@ -82,12 +82,12 @@ export const AI_AGENT_PATTERNS = [
   /Meta-ExternalAgent/i,
   /SearchGPT/i,
   /PhindBot/i,
-  
-  // Generic AI patterns
-  /ai-agent/i,
-  /artificial-intelligence/i,
-  /machine-learning/i,
-  /neural-network/i
+  // Major search bots (to ensure full SSR too)
+  /Googlebot/i,
+  /bingbot/i,
+  /Baiduspider/i,
+  /YandexBot/i,
+  /DuckDuckBot/i
 ]
 
 /**
